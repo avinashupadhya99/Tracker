@@ -7,25 +7,16 @@
  */
 
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, ScrollView, StyleSheet} from 'react-native';
 
+import Header from './components/Header';
 
-const App: () => Node = () => {
-
+const App = () => {
   return (
     <SafeAreaView>
-      <View>
-        <Text>Tracker</Text>
-      </View>
+      <ScrollView contentInsetAdjustmentBehavior="automatic">
+        <Header />
+      </ScrollView>
     </SafeAreaView>
   );
 };
