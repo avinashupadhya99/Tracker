@@ -22,7 +22,8 @@ MapboxGL.setAccessToken('');
 import Header from './components/Header';
 
 const App = () => {
-  const [cordinate, setCordinate] = useState([78.9629, 20.5937]);
+  const [centerCoordinate, setCenterCoordinate] = useState([78.9629, 20.5937]);
+  const [cordinate, setCordinate] = useState(null);
   useEffect(() => {
     fetch('https://locluggage-api.neeltron.repl.co/output')
       .then(locationData => locationData.json())
@@ -46,25 +47,27 @@ const App = () => {
             <MapboxGL.MapView
               styleURL={MapboxGL.StyleURL.Street}
               zoomLevel={16}
-              centerCoordinate={cordinate}
+              centerCoordinate={centerCoordinate}
               style={styles.map}>
               <MapboxGL.Camera
                 zoomLevel={4}
-                centerCoordinate={cordinate}
+                centerCoordinate={centerCoordinate}
                 animationMode={'flyTo'}
                 animationDuration={0}
               />
-              <MapboxGL.PointAnnotation
-                key={'9090'}
-                id="id1"
-                title="Test"
-                coordinate={cordinate}>
-                {/* <Image
+              {cordinate && (
+                <MapboxGL.PointAnnotation
+                  key={'9090'}
+                  id="id1"
+                  title="Test"
+                  coordinate={cordinate}>
+                  {/* <Image
                   source={require('./common/images/marker.png')}
                   style={styles.marker}
                 /> */}
-                <View style={styles.newMarker} />
-              </MapboxGL.PointAnnotation>
+                  <View style={styles.newMarker} />
+                </MapboxGL.PointAnnotation>
+              )}
             </MapboxGL.MapView>
           </View>
         </View>
