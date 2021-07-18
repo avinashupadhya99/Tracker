@@ -8,6 +8,7 @@
 
 import React, {useEffect, useState} from 'react';
 import {
+  Button,
   Dimensions,
   Image,
   SafeAreaView,
@@ -17,6 +18,7 @@ import {
   View,
 } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
+import openMap from 'react-native-open-maps';
 
 MapboxGL.setAccessToken('');
 
@@ -38,6 +40,16 @@ const App = () => {
       });
     MapboxGL.setTelemetryEnabled(false);
   }, []);
+
+  const _openMaps = () => {
+    console.log(123);
+    openMap({
+      latitude: cordinate[1],
+      longitude: cordinate[0],
+      query: `${cordinate[1]}, ${cordinate[0]}`,
+      end: `${cordinate[1]}, ${cordinate[0]}`,
+    });
+  };
 
   return (
     <SafeAreaView contentContainerStyle={StyleSheet.absoluteFillObject}>
@@ -73,6 +85,15 @@ const App = () => {
                 </MapboxGL.PointAnnotation>
               )}
             </MapboxGL.MapView>
+          </View>
+          <View>
+            {cordinate && (
+              <Button
+                onPress={_openMaps}
+                title="Click To Open Maps 🗺"
+                style={styles.button}
+              />
+            )}
           </View>
         </View>
       </ScrollView>
