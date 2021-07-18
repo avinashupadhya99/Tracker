@@ -57,6 +57,10 @@ const App = () => {
         <Header />
         <View>
           <Text style={styles.heading}>Track your luggage live!</Text>
+          <Text style={styles.subheading}>
+            Last updated:{' '}
+            {'Sun Jul 18 2021 13:32:40 GMT+0530 (India Standard Time)'}
+          </Text>
         </View>
         <View style={styles.page}>
           <View style={styles.container}>
@@ -86,13 +90,9 @@ const App = () => {
               )}
             </MapboxGL.MapView>
           </View>
-          <View>
+          <View style={styles.button}>
             {cordinate && (
-              <Button
-                onPress={_openMaps}
-                title="Click To Open Maps 🗺"
-                style={styles.button}
-              />
+              <Button onPress={_openMaps} title="Click To Open Maps 🗺" />
             )}
           </View>
         </View>
@@ -108,6 +108,10 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     padding: 10,
   },
+  subheading: {
+    fontFamily: 'sans-serif',
+    padding: 5,
+  },
   page: {
     flex: 1,
     justifyContent: 'center',
@@ -116,7 +120,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: 500,
-    width: Dimensions.get('window').width - 10,
+    width: Dimensions.get('window').width - 30,
     backgroundColor: 'tomato',
   },
   map: {
@@ -137,7 +141,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
   },
   button: {
-    marginTop: 10,
+    margin: 20,
   },
 });
 
