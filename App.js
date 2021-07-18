@@ -13,6 +13,7 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
+  Text,
   View,
 } from 'react-native';
 import MapboxGL from '@react-native-mapbox-gl/maps';
@@ -42,6 +43,9 @@ const App = () => {
     <SafeAreaView contentContainerStyle={StyleSheet.absoluteFillObject}>
       <ScrollView contentInsetAdjustmentBehavior="automatic">
         <Header />
+        <View>
+          <Text style={styles.heading}>Track your luggage live!</Text>
+        </View>
         <View style={styles.page}>
           <View style={styles.container}>
             <MapboxGL.MapView
@@ -77,6 +81,12 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  heading: {
+    fontFamily: 'sans-serif',
+    fontSize: 24,
+    fontWeight: '500',
+    padding: 10,
+  },
   page: {
     flex: 1,
     justifyContent: 'center',
@@ -85,7 +95,7 @@ const styles = StyleSheet.create({
   },
   container: {
     height: 500,
-    width: Dimensions.get('window').width,
+    width: Dimensions.get('window').width - 10,
     backgroundColor: 'tomato',
   },
   map: {
@@ -104,6 +114,9 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     borderColor: '#fff',
     borderWidth: 3,
+  },
+  button: {
+    marginTop: 10,
   },
 });
 
