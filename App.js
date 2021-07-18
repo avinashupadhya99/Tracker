@@ -22,16 +22,17 @@ MapboxGL.setAccessToken('');
 import Header from './components/Header';
 
 const App = () => {
-  const [coordinate, setCordinate] = useState([12.9716, 77.5946]);
+  const [cordinate, setCordinate] = useState([78.9629, 20.5937]);
   useEffect(() => {
     fetch('https://locluggage-api.neeltron.repl.co/output')
       .then(locationData => locationData.json())
       .then(locationData => {
         console.log(locationData);
         setCordinate([
-          parseFloat(locationData.lat),
-          parseFloat(locationData.long),
+          parseFloat(parseFloat(locationData.long).toFixed(7)),
+          parseFloat(parseFloat(locationData.lat).toFixed(7)),
         ]);
+        console.log(cordinate);
       });
     MapboxGL.setTelemetryEnabled(false);
   }, []);
@@ -42,15 +43,27 @@ const App = () => {
         <Header />
         <View style={styles.page}>
           <View style={styles.container}>
-            <MapboxGL.MapView style={styles.map}>
+            <MapboxGL.MapView
+              styleURL={MapboxGL.StyleURL.Street}
+              zoomLevel={16}
+              centerCoordinate={cordinate}
+              style={styles.map}>
+              <MapboxGL.Camera
+                zoomLevel={4}
+                centerCoordinate={cordinate}
+                animationMode={'flyTo'}
+                animationDuration={0}
+              />
               <MapboxGL.PointAnnotation
+                key={'9090'}
                 id="id1"
                 title="Test"
-                coordinate={coordinate}>
-                <Image
+                coordinate={cordinate}>
+                {/* <Image
                   source={require('./common/images/marker.png')}
-                  style={StyleSheet.marker}
-                />
+                  style={styles.marker}
+                /> */}
+                <View style={styles.newMarker} />
               </MapboxGL.PointAnnotation>
             </MapboxGL.MapView>
           </View>
@@ -68,7 +81,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
   container: {
-    height: 700,
+    height: 500,
     width: Dimensions.get('window').width,
     backgroundColor: 'tomato',
   },
@@ -78,8 +91,16 @@ const styles = StyleSheet.create({
   marker: {
     flex: 1,
     resizeMode: 'contain',
-    width: 25,
-    height: 25,
+    width: 50,
+    height: 50,
+  },
+  newMarker: {
+    height: 30,
+    width: 30,
+    backgroundColor: '#00cccc',
+    borderRadius: 50,
+    borderColor: '#fff',
+    borderWidth: 3,
   },
 });
 
