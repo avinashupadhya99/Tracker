@@ -58,8 +58,7 @@ const App = () => {
         <View>
           <Text style={styles.heading}>Track your luggage live!</Text>
           <Text style={styles.subheading}>
-            Last updated:{' '}
-            {'Sun Jul 18 2021 13:32:40 GMT+0530 (India Standard Time)'}
+            Last updated: {new Date().toString()}
           </Text>
         </View>
         <View style={styles.page}>
